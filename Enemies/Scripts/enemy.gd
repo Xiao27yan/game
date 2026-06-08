@@ -2,8 +2,8 @@ class_name Enemy extends CharacterBody2D
 #方向改变信号
 signal direction_changed(new_direction:Vector2)
 #攻击信号 发送对人物造成的伤害
-signal enemy_damaged()
-signal	enemy_destroyed()
+signal enemy_damaged(hurt_box:Area2D)
+signal	enemy_destroyed(hurt_box:Area2D)
 
 const DIR_4 = [Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT,Vector2.UP]
 @export var hp :int =3
@@ -60,12 +60,14 @@ func anim_direction()->String:
 func update_animation(state:String)->void:
 	animation_player.play(state + "_" + anim_direction())
 
-func _take_damage(Damage)->void:
+func _take_damage(hurt_box:Area2D)->void:
 	if invulnerable ==true:
 		return 
-	hp -= Damage
+	hp -= hurt_box.damage
 	if hp>0:
-		enemy_damaged.emit()
+		#发送信号给stun状态
+		enemy_damaged.emit(hurt_box)
 	else:
-		enemy_destroyed.emit()
+		#发送信号给销毁状态
+		enemy_destroyed.emit(hurt_box)
 	return

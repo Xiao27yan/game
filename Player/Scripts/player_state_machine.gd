@@ -33,14 +33,19 @@ func Initialize(_player:Player)->void:
 #	看看状态机里面有什么状态	
 	for c in get_children():
 		if c is State:
-			states.append(c)	
+			states.append(c)
+				
+	if states.size()==0:
+		return
+#	把第一个状态设置为进入游戏时的Plyer
+	states[0].player =_player 
+	states[0].state_machine = self
 	
-	if states.size() >0:
-#		把第一个状态设置为进入游戏时的Plyer
-		states[0].player =_player 
-		#这步很关键这步和上步合起来 把player挂给了idle  然后进入idle状态 再调用idle.player里的方法
-		ChangeState(states[0])
-		process_mode = Node.PROCESS_MODE_INHERIT
+	for state in states:
+		state.Init()
+#这步很关键这步和上步合起来 把player挂给了idle  然后进入idle状态 再调用idle.player里的方法
+	ChangeState(states[0])
+	process_mode = Node.PROCESS_MODE_INHERIT
 			
 	
 func ChangeState(new_state:State)->void:

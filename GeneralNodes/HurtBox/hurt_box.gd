@@ -19,5 +19,5 @@ func Damage(damage:int)->void:
 #如果受击框在范围内 就调用受击框承受伤害方法
 func AreaEntered(a:Area2D)->void:
 	if a is HitBox:
-		a.TakeDamage(damage)
+		a.TakeDamage(self)
 	pass

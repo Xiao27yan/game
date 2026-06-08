@@ -6,6 +6,7 @@ class_name EnemyStateDextroy extends EnemyState
 
 @export_category("AI ")
 @export var next_state :EnemyState
+var _destroyed_position :Vector2
 
 var _direction:Vector2
 
@@ -19,8 +20,8 @@ func init()->void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Enter()->void:
 	enemy.invulnerable =true
-#	获取玩家坐标 这样 我们就有了击退方向
-	_direction = enemy.global_position.direction_to(enemy.player.global_position)
+#	获取敌人指向对player的方向 是一个向量 这样 我们就有了击退方向
+	_direction = enemy.global_position.direction_to(_destroyed_position)
 	#_direction = enemy.DIR_4[rand]
 	enemy.set_direction(_direction)
 	enemy.velocity = _direction*-knockback_speed
@@ -42,12 +43,11 @@ func Process(_delta:float)->EnemyState:
 #物理行为更新
 func Physics(_delta:float)->EnemyState:
 	return	null
-	
-func _on_enemy_damaged()->void:
-	state_machine.change_state(self)
+
 
 func _on_animation_finished(I_a:String)->void:
 	enemy.queue_free()
 	
-func _on_enemy_destroyed()->void:
+func _on_enemy_destroyed(hurt_box:HurtBox)->void:
+	_destroyed_position = hurt_box.global_position
 	state_machine.change_state(self)

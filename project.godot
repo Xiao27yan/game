@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="qwq"
-run/main_scene="uid://bv25f6kovki50"
+run/main_scene="uid://su3wceble723"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

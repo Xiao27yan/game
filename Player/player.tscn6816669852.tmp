@@ -671,6 +671,9 @@ attack_sound = ExtResource("8_od3ui")
 
 [node name="Stun" type="Node" parent="StateMachine" unique_id=1212819176]
 script = ExtResource("11_dkpta")
+knockback_speed = null
+decelerate_speed = null
+invulnerable_duration = null
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1565105021]
 zoom = Vector2(0.9, 0.9)

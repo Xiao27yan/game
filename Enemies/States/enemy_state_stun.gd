@@ -9,6 +9,7 @@ class_name EnemyStateStun extends EnemyState
 
 var _animation_finished:bool = false
 var _direction:Vector2
+var _damage_position:Vector2
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,8 +22,8 @@ func init()->void:
 func Enter()->void:
 	enemy.invulnerable =true
 	_animation_finished = false
-#	获取玩家坐标 这样 我们就有了击退方向
-	_direction = enemy.global_position.direction_to(enemy.player.global_position)
+#	获取敌人指向对player的方向 是一个向量 这样 我们就有了击退方向
+	_direction = enemy.global_position.direction_to(_damage_position)
 	#_direction = enemy.DIR_4[rand]
 	enemy.velocity = _direction*-knockback_speed
 	enemy.set_direction(_direction)
@@ -46,7 +47,9 @@ func Process(_delta:float)->EnemyState:
 func Physics(_delta:float)->EnemyState:
 	return	null
 	
-func _on_enemy_damaged()->void:
+func _on_enemy_damaged(hurt_box:HurtBox)->void:
+#	获取攻击盒子的位置
+	_damage_position = hurt_box.global_position 
 	state_machine.change_state(self)
 
 func _on_animation_finished(I_a:String)->void:

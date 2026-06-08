@@ -10,6 +10,10 @@ class_name State_Idle extends State
 func Enter()->void:
 	player.UpdateAnimation("idle")
 	pass
+	
+func Init()->void:
+	return
+
 
 func Exit()->void:
 	pass
