@@ -70,6 +70,7 @@ func AnimDirecition()->String:
 		return "side"
 
 func _take_damage(hurt_box:HurtBox)->void:
+	#只有invulnerable是false的时候人物才能被攻击
 	if invulnerable ==true:
 		return
 	update_hp(-hurt_box.damage)
@@ -84,6 +85,7 @@ func update_hp(delta:int)->void:
 	hp = clampi(hp +delta,0,max_hp)
 	pass
 	
+	#在无敌时间没过前人物不可被攻击1信号传递不出去2hit_box不可见 过了无敌时间将invulnerable设置为false人物也可以被攻击  
 func make_invulnerable(invulnerable_duration:float=1.0)->void:
 	invulnerable = true
 	hit_box.monitoring = false	

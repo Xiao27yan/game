@@ -16,7 +16,6 @@ func Init()->void:
 
 
 func Enter()->void:
-	
 	player.animation_player.animation_finished.disconnect(_animation_finished)
 	direction = player.global_position.direction_to(hurt_box.global_position)
 	player.velocity =direction*-knockback_speed
@@ -29,9 +28,11 @@ func Enter()->void:
 
 func Exit()->void:
 	next_state = null
+#	player受击后 传递signal 调用machine的ChangeState(stun)方法 进入stun状态 然后设置 朝向 与 反向位移 最后播放动画  无敌帧过后 动画播放结束可以转向下一个状态 _animation_finished方法负责 
 	player.effect_animation_player.play("damaged")
 	pass
 #每帧逻辑
+
 
 func Process(_delata:float)->State:
 	player.velocity -= player.velocity*decelerate_speed*_delata
