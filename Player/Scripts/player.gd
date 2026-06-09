@@ -6,7 +6,7 @@ var cardinal_direction:Vector2=Vector2.DOWN
 
 var invulnerable:bool=false
 var hp:int=6
-var max_hp:int =6
+var max_hp:int =20
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -83,6 +83,7 @@ func _take_damage(hurt_box:HurtBox)->void:
 	
 func update_hp(delta:int)->void:
 	hp = clampi(hp +delta,0,max_hp)
+	PlayerHud.update_hp(hp,max_hp)
 	pass
 	
 	#在无敌时间没过前人物不可被攻击1信号传递不出去2hit_box不可见 过了无敌时间将invulnerable设置为false人物也可以被攻击  
