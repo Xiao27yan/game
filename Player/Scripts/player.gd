@@ -6,7 +6,7 @@ var cardinal_direction:Vector2=Vector2.DOWN
 
 var invulnerable:bool=false
 var hp:int=6
-var max_hp:int =20
+var max_hp:int =6
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D

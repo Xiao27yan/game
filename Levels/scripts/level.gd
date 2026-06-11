@@ -1,15 +1,13 @@
-class_name Plant extends Node
+class_name Level extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HitBox.Damaged.connect(TakeDamage)
+	self.y_sort_enabled =true
+	PlayerManager.set_as_parent(self)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func TakeDamage(hurt_box:Area2D)->void:
-	
-#	待销毁 植物被攻击时将会销毁
-	queue_free()
+func _process(delta: float) -> void:
 	pass
