@@ -19,7 +19,9 @@ func add_player_instance()->void:
 
 
 func set_player_position(_new_pos:Vector2)->void:
-	player.global_position = _new_pos
+#	将新添加的player坐标转化为之前放置的player_spawn
+	player.global_position = _new_pos 
+	
 	pass
 	
 func set_as_parent(_p :Node2D)->void:
