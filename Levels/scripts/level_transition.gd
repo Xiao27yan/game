@@ -4,7 +4,7 @@
 class_name LevelTransition extends Area2D
 
 enum SIDE {LEFT,RIGHT,TOP,BOTTOM}
-
+@onready var collision_shape:CollisionShape2D =$CollisionShape2D 
 @export_file("*tscn") var level
 @export var target_transition_area:String = "LevelTransition"
 
@@ -22,25 +22,53 @@ enum SIDE {LEFT,RIGHT,TOP,BOTTOM}
 		_update_area()
 
 @export var snap_to_grid:bool = false
-
-@onready var collision_shape:CollisionShape2D
-# Called when the node enters the scene tree for the first time.
+	
 func _ready() -> void:
 	_update_area()
 	#true 表示当前在编辑器里执行 false 表示游戏运行时
 	if Engine.is_editor_hint():
 		return
+	monitoring = false
+	_place_player()
+	await LevelManager.level_loaded
+	
+	monitoring=true
+	body_entered.connect(_player_entered)	
+	
 		
-		#monitoring = false
+	
 		
-		body_entered.connect(_player_entered)
+	body_entered.connect(_player_entered)
 	pass 
 	
 func _player_entered(_p:Node2D)->void:
 	#把关卡 目标区域（下一个关卡的位置） 还有 坐标传给关卡管理器
-	LevelManager.load_new_level(level,target_transition_area,Vector2.ZERO)
+	LevelManager.load_new_level(level,target_transition_area,get_offset())
 	pass
 	
+#	?
+func _place_player()->void:
+	if name!=LevelManager.target_transition:
+		return
+	PlayerManager.set_player_position(global_position+LevelManager.position_offset)
+	
+#	?
+func get_offset()->Vector2:
+	var offset:Vector2 = Vector2.ZERO
+	var player_pos = PlayerManager.player.global_position
+	
+	if side ==SIDE.LEFT or side == SIDE.RIGHT:
+		offset.y =player_pos.y - global_position.y
+		offset.x = 16
+		if side ==SIDE.LEFT:
+			offset.x *=-1
+	else:
+		offset.x =player_pos.y - global_position.y
+		offset.y = 16
+		if side ==SIDE.LEFT:
+			offset.y *=-1
+		
+	return offset
 	
 func _update_area()->void:
 	var new_rect:Vector2 = Vector2(32,32)
@@ -58,9 +86,12 @@ func _update_area()->void:
 	elif side == SIDE.RIGHT:
 		new_rect.y *=size
 		new_position.x +=16
-	
+		
 	if collision_shape == null:
-		collision_shape=  get_node("CollisionShape2D")
+		return
+	
+	if collision_shape.shape == null:
+		return
 		
 	
 	collision_shape.shape.size = new_rect
