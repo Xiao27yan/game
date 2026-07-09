@@ -5,7 +5,11 @@ class_name LevelTransition extends Area2D
 
 enum SIDE {LEFT,RIGHT,TOP,BOTTOM}
 @onready var collision_shape:CollisionShape2D =$CollisionShape2D 
+
+#跳转到目标场景文件
 @export_file("*tscn") var level
+
+#跳转到目标场景中 传送门的名称
 @export var target_transition_area:String = "LevelTransition"
 
 @export_category("Collision Area Settings")
@@ -21,7 +25,6 @@ enum SIDE {LEFT,RIGHT,TOP,BOTTOM}
 		side = _v
 		_update_area()
 
-@export var snap_to_grid:bool = false
 	
 func _ready() -> void:
 	_update_area()
@@ -33,10 +36,11 @@ func _ready() -> void:
 	await LevelManager.level_loaded
 	
 	monitoring=true
+	
+#	有物体进入的时候就调用player_entered
 	body_entered.connect(_player_entered)	
 	
 		
-	
 		
 	body_entered.connect(_player_entered)
 	pass 
@@ -55,6 +59,7 @@ func _place_player()->void:
 #	?
 func get_offset()->Vector2:
 	var offset:Vector2 = Vector2.ZERO
+	#获取玩家坐标
 	var player_pos = PlayerManager.player.global_position
 	
 	if side ==SIDE.LEFT or side == SIDE.RIGHT:
