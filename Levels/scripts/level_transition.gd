@@ -12,6 +12,7 @@ enum SIDE {LEFT,RIGHT,TOP,BOTTOM}
 #跳转到目标场景中 传送门的名称
 @export var target_transition_area:String = "LevelTransition"
 
+#碰撞区域设置
 @export_category("Collision Area Settings")
 
 @export_range(1,12,1,"or_greater") var size :int =2:
@@ -68,9 +69,9 @@ func get_offset()->Vector2:
 		if side ==SIDE.LEFT:
 			offset.x *=-1
 	else:
-		offset.x =player_pos.y - global_position.y
-		offset.y = 16
-		if side ==SIDE.LEFT:
+		offset.x =player_pos.x - global_position.x
+		offset.y =35
+		if side ==SIDE.TOP:
 			offset.y *=-1
 		
 	return offset

@@ -21,6 +21,8 @@ LevelManager="*uid://cwa0etckrxp0l"
 PlayerHud="*uid://cwoxj1soaomo0"
 PlayerManager="*uid://dkjp4wkh6t1tn"
 SceneTransition="*uid://dlea7oqjv1647"
+PauseMenu="*uid://dy73ughx1ppvu"
+SaveManager="*uid://cgunsbk2m34oj"
 
 [display]
 
@@ -58,6 +60,11 @@ attack={
 shift={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

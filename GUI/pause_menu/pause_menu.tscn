@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dy73ughx1ppvu"]
+
+[ext_resource type="Script" uid="uid://dox6r1tgaf24s" path="res://GUI/pause_menu/pause_menu.gd" id="1_4w82k"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1237009672]
+process_mode = 3
+script = ExtResource("1_4w82k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2016682629]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12156863, 0.12156863, 0.12156863, 0.3764706)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=343675792]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -33.0
+offset_right = 59.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button_Save" type="Button" parent="VBoxContainer" unique_id=676855076]
+layout_mode = 2
+text = "Save"
+
+[node name="Button_Load" type="Button" parent="VBoxContainer" unique_id=148469351]
+layout_mode = 2
+text = "Load"
+
+[node name="Label" type="Label" parent="." unique_id=748498232]
+modulate = Color(0.8732984, 0.8732984, 0.8732984, 1)
+offset_left = 541.0
+offset_top = 257.0
+offset_right = 612.0
+offset_bottom = 280.0
+text = "{paused}"

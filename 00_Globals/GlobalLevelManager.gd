@@ -28,7 +28,9 @@ func load_new_level(
 )->void:
 	#先暂停游戏，防止切换场景时玩家还能移动或触发其他事件。
 	get_tree().paused = true
+#	跳转场景的目标传送门
 	target_transition = _target_transition	
+#	新位置
 	position_offset = _position_offset
 	
 	await SceneTransition.fade_out()

@@ -16,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.9964715, 1.0182037)
+mouse_filter = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Control" unique_id=1580063849]
 position = Vector2(1074, 16)

@@ -18,6 +18,12 @@ func add_player_instance()->void:
 	pass
 
 
+func set_health(hp:int,max_hp:int)->void:
+	player.hp = hp
+	player.max_hp = max_hp
+	player.update_hp(0)
+
+
 func set_player_position(_new_pos:Vector2)->void:
 #	将新添加的player坐标转化为之前放置的player_spawn
 	player.global_position = _new_pos 
