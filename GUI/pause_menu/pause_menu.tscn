@@ -1,12 +1,37 @@
 [gd_scene format=3 uid="uid://dy73ughx1ppvu"]
 
 [ext_resource type="Script" uid="uid://dox6r1tgaf24s" path="res://GUI/pause_menu/pause_menu.gd" id="1_4w82k"]
+[ext_resource type="Texture2D" uid="uid://c26b0or350xd5" path="res://Items/Sprites/items.png" id="2_yiq8o"]
+[ext_resource type="Script" uid="uid://dbpiw58bwp56v" path="res://GUI/pause_menu/inventory/scripts/inventory_ui.gd" id="3_ewgu5"]
+[ext_resource type="PackedScene" uid="uid://dmax67hehooaa" path="res://GUI/pause_menu/inventory/inventory_slot.tscn" id="3_rsqrg"]
+[ext_resource type="Resource" uid="uid://dnd5wxkgorl0p" path="res://GUI/pause_menu/inventory/player_inventory.tres" id="4_sn1ji"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rsqrg"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_yiq8o")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+region_rect = Rect2(96, 0, 32, 32)
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1237009672]
 process_mode = 3
 script = ExtResource("1_4w82k")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2016682629]
+[node name="Control" type="Control" parent="." unique_id=264114908]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=2016682629]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,31 +39,76 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12156863, 0.12156863, 0.12156863, 0.3764706)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=343675792]
-anchors_preset = 8
-anchor_left = 0.5
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1554264424]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 188.0
+offset_right = 325.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rsqrg")
+
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer" unique_id=1313856038]
+layout_mode = 2
+columns = 5
+script = ExtResource("3_ewgu5")
+data = ExtResource("4_sn1ji")
+
+[node name="InventorySlot" parent="Control/PanelContainer/GridContainer" unique_id=97366411 instance=ExtResource("3_rsqrg")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Control/PanelContainer/GridContainer" unique_id=2050785423 instance=ExtResource("3_rsqrg")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="Control/PanelContainer/GridContainer" unique_id=716732443 instance=ExtResource("3_rsqrg")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="Control/PanelContainer/GridContainer" unique_id=568996003 instance=ExtResource("3_rsqrg")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="Control/PanelContainer/GridContainer" unique_id=1934328991 instance=ExtResource("3_rsqrg")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Control" unique_id=1531840924]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.492
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.492
 anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -33.0
-offset_right = 59.5
-offset_bottom = 33.0
+offset_left = -423.784
+offset_top = 15.0
+offset_right = -269.784
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button_Save" type="Button" parent="VBoxContainer" unique_id=676855076]
+[node name="Button_Save" type="Button" parent="Control/VBoxContainer" unique_id=676855076]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Save"
 
-[node name="Button_Load" type="Button" parent="VBoxContainer" unique_id=148469351]
+[node name="Button_Load" type="Button" parent="Control/VBoxContainer" unique_id=148469351]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Load"
 
-[node name="Label" type="Label" parent="." unique_id=748498232]
+[node name="Label" type="Label" parent="Control" unique_id=748498232]
 modulate = Color(0.8732984, 0.8732984, 0.8732984, 1)
-offset_left = 541.0
-offset_top = 257.0
-offset_right = 612.0
-offset_bottom = 280.0
+layout_mode = 0
+offset_left = 140.0
+offset_top = 136.0
+offset_right = 211.0
+offset_bottom = 159.0
 text = "{paused}"
+
+[node name="ItemDescription" type="Label" parent="Control" unique_id=2025183802]
+modulate = Color(0.8732984, 0.8732984, 0.8732984, 1)
+layout_mode = 0
+offset_left = 142.0
+offset_top = 268.0
+offset_right = 306.0
+offset_bottom = 291.0
+theme_override_font_sizes/font_size = 10
+text = "a gem"
+horizontal_alignment = 1
+autowrap_mode = 2

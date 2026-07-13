@@ -33,7 +33,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	monitoring = false
+
 	_place_player()
+
 	await LevelManager.level_loaded
 	
 	monitoring=true
@@ -51,7 +53,7 @@ func _player_entered(_p:Node2D)->void:
 	LevelManager.load_new_level(level,target_transition_area,get_offset())
 	pass
 	
-#	?
+#	每个 传送门都会执行这个 如果 这个传送门的名  字和 关卡管理器的目标传送门名字一样 就把玩家放在这个传送门上
 func _place_player()->void:
 	if name!=LevelManager.target_transition:
 		return
